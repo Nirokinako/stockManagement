@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.stockManagement.repository.SmRepository">
+
+	<resultMap	id="stockList"
+				type="com.example.stockManagement.entity.Stock">
+		<id		property="stockId"		column="stock_id"/>
+		<result	property="record"		column="record"/>
+		<result	property="stockName"	column="stock_name"/>
+		<result	property="stockLevel"	column="stock_level"/>
+	</resultMap>
+	
+	<!-- 全件取得 -->
+	<select	id="selectListAll"
+			resultMap="stockList">
+			SELECT * FROM stock
+	</select>
+	
+	<!-- 在庫検索 -->
+	<select	id="selectListStock"
+			resultMap="stockList">
+			SELECT * FROM stock where stock_name = #{stockName}
+	</select>
+	
+	<!-- 	①在庫編集（情報取得）	 -->
+	<select id="selectEditStock"
+			resultMap="stockList">
+			SELECT * FROM stock where stock_id = #{stockId}
+	</select>
+	
+	<!-- 	②在庫登録			 -->
+	<insert id="insertStock">
+		INSERT INTO
+			stock
+			(record_dt,		stock_name,		stock_level)
+		VALUES
+			(#{recordDt},	#{stockName},	#{stockLevel})
+	</insert>
+	
+	<!-- 	③在庫編集（更新）	 -->
+	<update id ="updateStock">
+			UPDATE 
+				stock
+			SET
+				record_dt = #{recordDt},
+				stock_name = #{stockName},
+				stock_level = #{stockLevel}
+			WHERE
+				stock_id = #{stockId}
+	</update>
+	
+	<!-- 	④在庫管理（削除）	 -->
+	<delete id="deleteStock">
+			DELETE FROM
+				stock
+			WHERE
+				stock_id = #{stockId}
+	</delete>
+
+</mapper>

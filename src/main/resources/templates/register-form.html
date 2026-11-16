@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>在庫新規登録</title>
+</head>
+<body>
+	
+	<h1>新規登録</h1>
+	<form th:action="@{/stockSearch/insert}" method="post">
+		<!--	ID（hidden）	-->
+		<input type="hidden">
+		
+		登録日：<input type="date" name="recordDt" >
+		<br>
+		
+		在庫名：<input type="text" name="stockName">
+		<br>
+		
+		在庫数：<input type="number" name="stockLevel">
+		<br>
+		
+		<input type="submit" value="登録">
+		
+	</form>
+
+</body>
+</html>

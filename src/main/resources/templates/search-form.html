@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>検索フォーム</title>
+</head>
+<body>
+
+	<h1>在庫管理</h1>
+	
+	<!--	在庫検索	-->
+	<form th:action="@{/stockSearch/search-stock-result}" method="post">
+		在庫名を入力してください。<br>
+		<input type="text" name="stockName">
+		<input type="submit" value="検索"><br><br>
+	</form>
+	
+	<!--	在庫登録	-->
+	<form th:action="@{/stockSearch/register-form}"  method="post">
+		<input type="submit" value="新規登録">
+	</form>
+	
+	<!--	全件表示	-->
+	<form th:action="@{/stockSearch/search-all-result}" method="post">
+		<input type="submit" value="全件表示">
+	</form>
+	
+	<div th:if="${stockList} != null">
+		
+		<table>
+			<tr>
+				<th>在庫ID</th><th>記録・更新日</th><th>在庫名</th><th>在庫数</th>
+			</tr>
+			
+			<tr th:each="stock : ${stockList}">
+				<td th:text="${stock.stockId}"></td>
+				<td th:text="${stock.recordDt}"></td>
+				<td th:text="${stock.stockName}"></td>
+				<td th:text="${stock.stockLevel}"></td>
+			</tr>
+		</table>
+	</div>
+	
+	
+	<!--	在庫検索	-->
+	<div th:if="${ssResult} != null">
+		
+		<h2>検索結果</h2>
+		
+		<table>
+			<tr>
+				<th>在庫ID</th><th>記録・更新日</th><th>在庫名</th><th>在庫数</th><th>修正</th><th>削除</th>
+			</tr>
+			
+			<tr th:each="stock : ${ssResult}">
+				<td th:text="${stock.stockId}"></td>
+				<td th:text="${stock.recordDt}"></td>
+				<td th:text="${stock.stockName}"></td>
+				<td th:text="${stock.stockLevel}"></td>
+				<td>
+					<a th:href="@{/stockSearch/{stockId}/edit(stockId=${stock.stockId})}">修正</a>
+				</td>
+				<td>
+					<a th:href="@{/stockSearch/{stockId}/delete(stockId=${stock.stockId})}">削除</a>
+				</td>
+
+				
+			</tr>
+		</table>
+	</div>
+	
+</body>
+</html>

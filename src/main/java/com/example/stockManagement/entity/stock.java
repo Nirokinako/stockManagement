@@ -7,13 +7,13 @@ import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
 @Data
-public class stock {
+public class Stock {
 	
 	private Integer stockId;
 	
 	
 	@NotNull
-	private Date record;
+	private Date recordDt;
 	
 	
 	@NotNull

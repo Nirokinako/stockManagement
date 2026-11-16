@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>在庫情報編集</title>
+</head>
+<body>
+	
+	<h1>在庫情報編集</h1>
+	<form th:action="@{/stockSearch/edit}" method="post">
+		
+		<div th:each="seStock : ${seResult}">
+			<!--	ID(hidden)		-->
+			<input type="hidden" name="stockId" th:value="${seStock.stockId}">
+			
+			更新日：<input type="date" name="recordDt" th:value="${seStock.recordDt}">
+			<br>
+			
+			在庫名：<input type="text" name="stockName" th:value="${seStock.stockName}">
+			<br>
+			
+			在庫数：<input type="number" name="stockLevel" th:value="${seStock.stockLevel}">
+			<br>
+		
+		</div>
+		<input type="submit" value="更新">
+		
+	</form>
+
+</body>
+</html>
